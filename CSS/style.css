@@ -1,0 +1,797 @@
+@charset "UTF-8";
+
+/* ------- 共通 ------- */
+
+:root {
+  --baseColor: #2c2c2c;
+  --white: #ffffff;
+  --mgMd: 30px;
+}
+
+body {
+  font-family: "Noto Serif JP", serif;
+  font-weight: 300;
+  font-optical-sizing: auto;
+  font-style: normal;
+  background-image: url(../img/bg_main.jpg);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+p {
+  font-size: 16px;
+}
+
+/* ----- 共通 ------ */
+
+/* スクロールで出る演出 */
+.js-fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s,
+    transform 0.8s;
+}
+
+.js-fade.is-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ------- header ------- */
+
+header {
+  position: relative;
+  background-color: #fff;
+}
+
+.logo {
+  width: 173px;
+  padding: 22px 4px;
+}
+
+/* ハンバーガーボタン */
+.hamburger {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  position: absolute;
+  left: 24px;
+  width: 32px;
+  height: 1px;
+  background-color: var(--baseColor);
+  transition:
+    top 0.3s,
+    transform 0.3s,
+    opacity 0.3s,
+    background-color 0.3s;
+}
+
+.hamburger span:nth-child(1) {
+  top: 30px;
+}
+.hamburger span:nth-child(2) {
+  top: 40px;
+}
+.hamburger span:nth-child(3) {
+  top: 50px;
+}
+
+/* 開いたとき：×印にする */
+.hamburger.is-open span {
+  background-color: var(--white);
+}
+.hamburger.is-open span:nth-child(1) {
+  top: 40px;
+  transform: rotate(45deg);
+}
+.hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.is-open span:nth-child(3) {
+  top: 40px;
+  transform: rotate(-45deg);
+}
+
+/* 全画面メニュー */
+.header__nav {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: var(--baseColor);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.4s,
+    visibility 0.4s;
+}
+
+.header__nav.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.header__nav nav {
+  height: 100%;
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 56px;
+  height: 100%;
+}
+
+.nav__list a {
+  color: var(--white);
+  font-size: 20px;
+  letter-spacing: 0.15em;
+}
+
+/* メニューを開いている間は背面をスクロールさせない */
+.is-lock {
+  overflow: hidden;
+}
+
+/* ------- メインビジュアル ------- */
+
+.header__fv {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: url("../img/FV.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.header__fv img {
+  position: absolute;
+  width: 100px;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: fadeIn 1.5s ease 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*--------- 導入 --------*/
+
+.section__start {
+  padding: 60px 20px 30px;
+}
+
+/*-----縦書きフォント----*/
+
+.title__flex {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  max-width: 500px;
+  margin: 0 auto 30px;
+}
+
+.font__lg {
+  display: block;
+  font-family: "Noto Serif JP", serif;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.3em;
+  font-size: 23px;
+  writing-mode: vertical-rl;
+  color: var(--baseColor);
+}
+
+.font__md {
+  display: block;
+  font-family: "Noto Serif JP", serif;
+  font-weight: 200;
+  font-style: normal;
+  font-size: 18px;
+  writing-mode: vertical-rl;
+  letter-spacing: 0.2em;
+  line-height: 2em;
+}
+
+.leaf__img {
+  margin-top: 100px;
+}
+
+.leaf__img img {
+  width: 40px;
+  object-fit: contain;
+}
+
+/* ------- お品書き ------- */
+
+#menu {
+  background: url("../img/BG.png") center top / cover no-repeat;
+  color: var(--white);
+  padding: 20px;
+}
+
+.container__menu h2 {
+  text-align: center;
+  margin: 10px auto 30px;
+}
+
+.menu__item {
+  margin-bottom: var(--mgMd);
+}
+
+.menu__item__body {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 左:焼き鳥 + YAKITORI の箱 */
+.menu__item__title {
+  width: 20%;
+}
+
+/* h3の中の ja と en を横に並べる */
+.menu__item__title h3 {
+  display: flex;
+}
+
+/* 焼き鳥(日本語) */
+.menu__item__ja {
+  position: relative;
+  font-family: "Noto Serif JP", serif;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  font-size: 24px;
+  writing-mode: vertical-rl;
+  padding: 30px 10px 0 0;
+}
+
+/* 焼き鳥の右に引く縦線(今は最初から表示) */
+.menu__item__ja::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 135px;
+  background-color: #ffffff6b;
+}
+
+/* YAKITORI(英語) */
+.menu__item__en {
+  font-family: "Cinzel", serif;
+  font-weight: 200;
+  font-size: 14px;
+  writing-mode: vertical-rl;
+  text-orientation: sideways;
+  padding: 30px 0 0 5px;
+}
+
+/* 右:説明文の箱 */
+.menu__item__text {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  max-width: 240px;
+  width: 80%;
+  padding-top: 25px;
+  line-height: 2;
+  font-weight: 100;
+}
+
+.menu__item__price {
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+/* ----- サブメニュー ----- */
+
+.sub {
+  background-color: var(--white);
+  color: var(--baseColor);
+  margin-bottom: 10px;
+  padding: 30px 11px;
+}
+
+.menu__sub {
+  font-size: 20px;
+  margin-bottom: 18px;
+  letter-spacing: 0.3em;
+  border-bottom: solid 1px #c2c2c2;
+  padding: 5px;
+}
+
+table {
+  width: 100%;
+  line-height: 1.7;
+  padding-left: 11px;
+}
+
+.sub tr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 6px 11px;
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+
+/* ----- お知らせ ----- */
+
+#news {
+  padding: 30px 20px;
+}
+
+.title__news {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+
+.title__news h2 {
+  display: block;
+}
+
+.leaf__news {
+  width: 30px;
+}
+
+.news__date {
+  margin-bottom: 5px;
+}
+
+.news__list li {
+  line-height: 1.8rem;
+  border-bottom: 1px solid #c2c2c2;
+  padding: 15px 0 15px;
+}
+
+.new__en {
+  font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  color: #c2c2c2;
+}
+
+/* ----- マップ ----- */
+
+#map iframe {
+  height: 200px;
+  filter: grayscale(1);
+}
+
+/* ----- 店舗案内 ----- */
+
+#info {
+  padding: 30px 20px;
+}
+
+.title__info {
+  display: flex;
+  align-items: baseline;
+  margin-top: 31px;
+}
+
+.leaf__info {
+  width: 40px;
+  align-self: flex-start; /* 葉っぱだけ上端に揃える */
+  margin-top: -30px; /* ここの数字で上下を微調整 */
+}
+
+.info__en {
+  font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  color: #c2c2c2;
+  font-size: 14px;
+}
+
+.info__text {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 400;
+  line-height: 2rem;
+  letter-spacing: 1px;
+  margin-top: 30px;
+}
+
+.info__btn a {
+  display: block;
+  width: 200px;
+  padding: 10px 30px;
+  text-align: center;
+  background-color: black;
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 400;
+  margin-top: 20px;
+  color: #fff;
+}
+
+footer {
+  background-color: #2c2c2c;
+  padding: 4px;
+}
+
+.footer__nav {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 300;
+  color: #fff;
+  margin: 20px;
+}
+
+.footer__nav li {
+  line-height: 3rem;
+  text-align: center;
+}
+
+.footer__sns {
+  display: flex;
+  justify-content: center;
+  gap: 45px;
+  padding: 50px 0 20px;
+}
+
+footer p {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 2px;
+  margin: 20px auto 6px;
+  text-align: center;
+}
+
+/*----------- レスポンシブ（ipadサイズ用） -------------*/
+@media screen and (min-width: 768px) {
+  header {
+    display: flex;
+    justify-content: space-between; /* ロゴは左、ナビは右 */
+    align-items: center; /* 縦の中央を揃える */
+    height: 90px;
+    background-color: #fff;
+  }
+
+  .logo {
+    width: 200px;
+  }
+
+  /* 1. ヘッダーの調整（PC用ナビを表示し、スマホ用のハンバーガーや非表示要素を切り替える場合など） */
+  .hamburger {
+    display: none;
+  }
+
+  .header__nav {
+    position: static;
+    height: 100%;
+    background: none;
+    opacity: 1;
+    visibility: visible;
+    letter-spacing: 1px;
+  }
+
+  .header__nav nav {
+    height: 100%;
+  }
+
+  .nav__list {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0;
+    height: 100%;
+  }
+
+  .nav__list a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 30px;
+    color: var(--baseColor);
+    font-size: 16px;
+    letter-spacing: inherit;
+  }
+
+  .header__nav__btn {
+    height: 100%;
+  }
+
+  .header__nav__btn a {
+    background-color: #2c2c2c;
+    color: #fff;
+  }
+
+  .header__fv {
+    height: 677px;
+    background-attachment: scroll;
+  }
+
+  .section__start {
+    padding: 120px 20px 60px;
+  }
+
+  .font__lg {
+    font-size: 32px;
+  }
+
+  .leaf__img {
+    margin-top: 100px; /* カンプに合わせて調整 */
+  }
+
+  .leaf__img img {
+    width: 70px;
+  }
+
+  .header__fv img {
+    top: 50%;
+    width: 150px;
+  }
+
+  .about__img {
+    max-width: 650px;
+    margin: 30px auto;
+  }
+
+  /* ------- お品書き ------- */
+
+  /* 2. お品書きのメニュー項目を横並びにする例 */
+  #menu {
+    padding: 30px;
+  }
+
+  .container__menu {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .menu__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+  .menu__item__ja::after {
+    height: 270px;
+  }
+
+  .menu__item:nth-child(even) {
+    flex-direction: row-reverse; /* 画像が右、テキストが左になる */
+  }
+
+  .menu__item__body {
+    display: flex;
+    flex-direction: column; /* 縦並びにする */
+    justify-content: space-between;
+    width: 50%;
+    padding: 0 0 0 60px; /* 奇数行(画像が左)：文章の左に余白 */
+    box-sizing: border-box;
+  }
+
+  .menu__item__title {
+    width: 100%; /* SPの20%を上書き */
+  }
+
+  .menu__item__title h3 {
+    justify-content: flex-end; /* タイトルを右へ */
+  }
+
+  .menu__item:nth-child(even) .menu__item__body {
+    padding: 0 60px 0 0; /* 偶数行(画像が右)：文章の右に余白 */
+  }
+
+  .menu__item:nth-child(even) .menu__item__title h3 {
+    justify-content: flex-start; /* お造りだけ左へ */
+  }
+
+  .menu__item:nth-child(even) .menu__item__text {
+    margin-left: auto; /* 本文を右寄りに */
+  }
+
+  .menu__item__img {
+    width: 50%;
+  }
+
+  .menu__item__text {
+    padding-bottom: 0;
+  }
+
+  .sub {
+    padding: 30px 35px;
+  }
+
+  /* !------- お知らせ ------- */
+  #news {
+    display: flex;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .news__list {
+    width: 80%;
+  }
+
+  .title__news {
+    position: relative; /* 葉っぱの基準にする */
+    display: flex;
+    align-items: flex-start; /* baseline をやめて上揃えに */
+    width: 20%;
+  }
+
+  .leaf__news {
+    position: absolute;
+    top: 140px; /* 見出しの下端あたり。数字は調整 */
+    left: -10px;
+    width: 60px; /* SPの30pxを上書き */
+  }
+
+  .title__news h2 {
+    writing-mode: vertical-rl;
+    font-size: 32px;
+    letter-spacing: 0.2em;
+  }
+
+  .new__en {
+    writing-mode: vertical-rl;
+    text-orientation: sideways; /* 英字を横倒しにして縦に流す */
+    margin-left: 6px;
+  }
+
+  /* -----  店舗案内 ----- */
+
+  /* 3. 店舗案内（#info）の左右２カラム化の例 */
+  #info {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 20px 120px; /* 上 左右 下 */
+  }
+
+  .info__img {
+    width: 50%;
+    /* margin: 30px は削除 */
+  }
+
+  .info__body {
+    display: flex;
+    flex-direction: column;
+    width: 46%; /* 残り8%が画像との間隔になる */
+  }
+
+  /* 見出しを右上へ */
+  .title__info {
+    position: relative; /* 葉っぱの基準 */
+    align-self: flex-end; /* 右端に寄せる */
+    align-items: flex-start; /* baseline をやめて上揃え */
+    margin-top: 0; /* SPの31pxを消す */
+  }
+
+  /* 見出しの文字だけ縦書き */
+  .title__info h2 {
+    writing-mode: vertical-rl;
+    font-size: 32px;
+    letter-spacing: 0.2em;
+  }
+
+  .info__en {
+    writing-mode: vertical-rl;
+    text-orientation: sideways;
+    margin-left: 8px;
+  }
+
+  /* 葉っぱは見出しの下に置く */
+  .leaf__info {
+    position: absolute;
+    top: 140px; /* 見出しの下端あたり。数字は調整 */
+    right: 20px;
+    margin-top: 0; /* SPの-30pxを消す */
+    width: 50px;
+  }
+
+  /* 本文とボタンを下へ押し下げる */
+  .info__text {
+    margin-top: auto;
+  }
+
+  /* ----- フッター ----- */
+  .footer__nav {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0 0;
+  }
+
+  .footer__nav li {
+    padding: 0 30px;
+  }
+
+  .footer__nav li + li {
+    position: relative;
+  }
+
+  .footer__nav li + li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 19px; /* 線の長さ。カンプに合わせて調整 */
+    border-left: 1px solid #fff;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .menu__item__img img,
+  .info__img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 500 / 312;
+    object-fit: cover;
+  }
+
+  .about__img {
+    margin-top: 60px;
+  }
+
+  #menu {
+    padding: 60px 20px; /* 186px → 20px */
+  }
+
+  .container__menu h2 {
+    font-size: 32px;
+    margin-bottom: 60px;
+  }
+
+  .menu__item__ja::after {
+    height: 312px;
+  }
+
+  .menu__sub {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  #news {
+    padding: 60px 0px;
+  }
+
+  .news__list {
+    max-width: 100%;
+  }
+
+  .news__date {
+    font-size: 18px;
+  }
+
+  #map iframe {
+    width: 100%;
+    height: 250px;
+  }
+
+  #info {
+    margin: 60px auto; /* 186px → auto */
+    padding: 0 0 120px;
+  }
+}
